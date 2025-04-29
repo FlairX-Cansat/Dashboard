@@ -1,1 +1,46 @@
-<p>home-page works!</p>
+<section>
+    <img src="logo.jpg" alt="Logo FlairX">
+    <h1>Acceuil</h1>
+    <h2>Statistiques de la dernière mission</h2>
+    <p *ngIf="lastMissionData != []">Dernière mission : {{ selectedMission }} le {{ lastMissionData.at(0)?.date?.toLocaleString('fr-FR', { dateStyle: 'long' }) }}</p>
+    <mat-card appearance="outlined" *ngIf="lastMissionData != []">
+        <mat-card-header>
+            <mat-card-title>Température</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>Température minimum : {{ temperature.at(0) }}°C<br>Température maximum : {{ temperature.at(-1) }}°C<br>Tmpérature moyenne : {{ temperatureMoyenne }}°C</p>
+        </mat-card-content>
+    </mat-card>
+    <mat-card appearance="outlined" *ngIf="lastMissionData != []">
+        <mat-card-header>
+            <mat-card-title>Pression</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>Pression minimum : {{ pressure.at(0) }}hPa<br>Pression maximum : {{ pressure.at(-1) }}hPa<br>Pression moyenne : {{ averagePressure }}hPa</p>
+        </mat-card-content>
+    </mat-card>
+    <mat-card appearance="outlined" *ngIf="lastMissionData != []">
+        <mat-card-header>
+            <mat-card-title>Altitude & vitesse</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>Altitude minimum : {{ altitude.at(0) }}m<br>Altitude maximum : {{ altitude.at(-1) }}m<br>Vitesse moyenne : {{ averageSpeed }}m/s</p>
+        </mat-card-content>
+    </mat-card>
+    <mat-card appearance="outlined" *ngIf="lastMissionData != []">
+        <mat-card-header>
+            <mat-card-title>Particules (STD)</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>Moyenne PM1 : {{ averagePm1Std }}ug/m3<br>Moyenne PM2.5 : {{ averagePm25Std }}ug/m3<br>Moyenne PM10 : {{ averagePm10Std }}ug/m3</p>
+        </mat-card-content>
+    </mat-card>
+    <mat-card appearance="outlined" *ngIf="lastMissionData != []">
+        <mat-card-header>
+            <mat-card-title>Particules (ATM)</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>Moyenne PM1 : {{ averagePm1Atm }}ug/m3<br>Moyenne PM2.5 : {{ averagePm25Atm }}ug/m3<br>Moyenne PM10 : {{ averagePm10Atm }}ug/m3</p>
+        </mat-card-content>
+    </mat-card>
+</section>
