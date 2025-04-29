@@ -8,19 +8,21 @@
     </mat-form-field>
     <p *ngIf="selectedMission==''">Veuillez sélectionner une mission pour afficher les données.</p>
     <p *ngIf="selectedMission!=''">Graphiques pour la mission {{ selectedMission }} du {{ missionData.at(0)?.date?.toLocaleString('fr-FR', { dateStyle: 'long' }) }}</p>
-    <div class="chart-container">
-        <canvas baseChart [type]="'line'" [data]="tempGraphData" *ngIf="selectedMission!=''" [options]="tempGraphOptions" id="temp-chart" #tempChart></canvas>
-    </div>
-    <div class="chart-container">
-        <canvas baseChart [type]="'line'" [data]="pressureGraph" *ngIf="selectedMission!=''" [options]="pressureGraphOptions" #pressureChart></canvas>
-    </div>
-    <div class="chart-container">
-        <canvas baseChart [type]="'line'" [data]="altitudeGraph" *ngIf="selectedMission!=''" [options]="altitudeGraphOptions" #altitudeChart></canvas>
-    </div>
-    <div class="chart-container">
-        <canvas baseChart [type]="'line'" [data]="stdParticuleData" *ngIf="selectedMission!=''" [options]="stdParticulesGraphOptions" #stdParticuleChart></canvas>
-    </div>
-    <div class="chart-container">
-        <canvas baseChart [type]="'line'" [data]="atmParticuleData" *ngIf="selectedMission!=''" [options]="atmParticulesGraphOptions" #atmParticuleChart></canvas>
+    <div class="chart-grid" *ngIf="selectedMission!=''">
+        <div class="chart-container">
+            <canvas baseChart [type]="'line'" [data]="tempGraphData" [options]="tempGraphOptions" id="temp-chart" #tempChart></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas baseChart [type]="'line'" [data]="pressureGraph" [options]="pressureGraphOptions" #pressureChart></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas baseChart [type]="'line'" [data]="altitudeGraph" [options]="altitudeGraphOptions" #altitudeChart></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas baseChart [type]="'line'" [data]="stdParticuleData" [options]="stdParticulesGraphOptions" #stdParticuleChart></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas baseChart [type]="'line'" [data]="atmParticuleData" [options]="atmParticulesGraphOptions" #atmParticuleChart></canvas>
+        </div>
     </div>
 </section>
