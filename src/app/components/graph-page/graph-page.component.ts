@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component, OnInit, QueryList, ViewChild, ViewChildre
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { DataService } from '../../services/data.service';
-import Chart, { ChartData, ChartItem } from 'chart.js/auto';
+import Chart, { ChartData, ChartItem, ChartOptions } from 'chart.js/auto';
 import { MissionData } from '../../interfaces/mission-data';
 import { BaseChartDirective } from 'ng2-charts';
 
@@ -31,6 +31,326 @@ export class GraphPageComponent implements OnInit {
   };
   tempGraphLabel: string[] = [];
   tempGraphYData: number[] = [];
+
+  tempGraphOptions: ChartOptions<'line'> = {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: {
+      mode: 'index',
+      intersect: false
+    },
+    plugins: {
+      title: {
+        display: true,
+        text: 'Température',
+        font: {
+          size: 18,
+          weight: 'bold'
+        }
+      },
+      legend: {
+        position: 'top',
+        labels: {
+          font: {
+            size: 12
+          },
+          boxWidth: 20
+        }
+      },
+      tooltip: {
+        enabled: true,
+        callbacks: {
+          label: context => `Température : ${context?.formattedValue}°C`
+        }
+      },
+    },
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Heure',
+          font: {
+            size: 14
+          },
+        },
+        ticks: {
+          maxRotation: 45,
+          minRotation: 45
+        },
+        grid: {
+          display: false
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Température (°C)',
+          font: {
+            size: 14
+          }
+        },
+        grid: {
+          color: 'rgba(0,0,0,0.05)'
+        }
+      }
+    }
+  }
+
+  pressureGraphOptions: ChartOptions<'line'> = {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: {
+      mode: 'index',
+      intersect: false
+    },
+    plugins: {
+      title: {
+        display: true,
+        text: 'Pression',
+        font: {
+          size: 18,
+          weight: 'bold'
+        }
+      },
+      legend: {
+        position: 'top',
+        labels: {
+          font: {
+            size: 12
+          },
+          boxWidth: 20
+        }
+      },
+      tooltip: {
+        enabled: true,
+        callbacks: {
+          label: context => `Pression : ${context?.formattedValue}hPa`
+        }
+      },
+    },
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Heure',
+          font: {
+            size: 14
+          },
+        },
+        ticks: {
+          maxRotation: 45,
+          minRotation: 45
+        },
+        grid: {
+          display: false
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Pression (hPa)',
+          font: {
+            size: 14
+          }
+        },
+        grid: {
+          color: 'rgba(0,0,0,0.05)'
+        }
+      }
+    }
+  }
+
+  altitudeGraphOptions: ChartOptions<'line'> = {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: {
+      mode: 'index',
+      intersect: false
+    },
+    plugins: {
+      title: {
+        display: true,
+        text: 'Altitude',
+        font: {
+          size: 18,
+          weight: 'bold'
+        }
+      },
+      legend: {
+        position: 'top',
+        labels: {
+          font: {
+            size: 12
+          },
+          boxWidth: 20
+        }
+      },
+      tooltip: {
+        enabled: true,
+        callbacks: {
+          label: context => `Altitude : ${context?.formattedValue}m`
+        }
+      },
+    },
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Heure',
+          font: {
+            size: 14
+          },
+        },
+        ticks: {
+          maxRotation: 45,
+          minRotation: 45
+        },
+        grid: {
+          display: false
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Altitude (m)',
+          font: {
+            size: 14
+          }
+        },
+        grid: {
+          color: 'rgba(0,0,0,0.05)'
+        }
+      }
+    }
+  }
+
+  stdParticulesGraphOptions: ChartOptions<'line'> = {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: {
+      mode: 'index',
+      intersect: false
+    },
+    plugins: {
+      title: {
+        display: true,
+        text: 'Particules (STD)',
+        font: {
+          size: 18,
+          weight: 'bold'
+        }
+      },
+      legend: {
+        position: 'top',
+        labels: {
+          font: {
+            size: 12
+          },
+          boxWidth: 20
+        }
+      },
+      tooltip: {
+        enabled: true,
+        callbacks: {
+          label: context => `${context.dataset.label} : ${context?.formattedValue}ug/m3`
+        }
+      },
+    },
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Heure',
+          font: {
+            size: 14
+          },
+        },
+        ticks: {
+          maxRotation: 45,
+          minRotation: 45
+        },
+        grid: {
+          display: false
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Particules (ug/m3)',
+          font: {
+            size: 14
+          }
+        },
+        grid: {
+          color: 'rgba(0,0,0,0.05)'
+        }
+      }
+    }
+  }
+
+  atmParticulesGraphOptions: ChartOptions<'line'> = {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: {
+      mode: 'index',
+      intersect: false
+    },
+    plugins: {
+      title: {
+        display: true,
+        text: 'Particules (ATM)',
+        font: {
+          size: 18,
+          weight: 'bold'
+        }
+      },
+      legend: {
+        position: 'top',
+        labels: {
+          font: {
+            size: 12
+          },
+          boxWidth: 20
+        }
+      },
+      tooltip: {
+        enabled: true,
+        callbacks: {
+          label: context => `${context.dataset.label} : ${context?.formattedValue}ug/m3`
+        }
+      },
+    },
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Heure',
+          font: {
+            size: 14
+          },
+        },
+        ticks: {
+          maxRotation: 45,
+          minRotation: 45
+        },
+        grid: {
+          display: false
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Particules (ug/m3)',
+          font: {
+            size: 14
+          }
+        },
+        grid: {
+          color: 'rgba(0,0,0,0.05)'
+        }
+      }
+    }
+  }
 
   pressureGraph: ChartData<'line', number[], string> = {
     datasets: [{
@@ -119,15 +439,15 @@ export class GraphPageComponent implements OnInit {
       this.stdParticuleData = {
         labels: this.tempGraphLabel,
         datasets: [{
-          label: 'PM1(STD, ug/m3)',
+          label: 'PM1',
           data: missionData.map(data => Number(data.PM_STD_1))
         },
         {
-          label: 'PM2.5(STD, ug/m3)',
+          label: 'PM2.5',
           data: missionData.map(data => Number(data.PM_STD_2_5))
         },
         {
-          label: 'PM10(STD, ug/m3)',
+          label: 'PM10',
           data: missionData.map(data => Number(data.PM_STD_10))
         }
       ]
@@ -136,15 +456,15 @@ export class GraphPageComponent implements OnInit {
       this.atmParticuleData = {
         labels: this.tempGraphLabel,
         datasets: [{
-          label: 'PM1(ATM, ug/m3)',
+          label: 'PM1',
           data: missionData.map(data => Number(data.PM_ATM_1))
         },
         {
-          label: 'PM2.5(ATM, ug/m3)',
+          label: 'PM2.5',
           data: missionData.map(data => Number(data.PM_ATM_2_5))
         },
         {
-          label: 'PM10(ATM, ug/m3)',
+          label: 'PM10',
           data: missionData.map(data => Number(data.PM_ATM_10))
         }
       ]
