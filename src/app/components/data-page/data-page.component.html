@@ -1,0 +1,64 @@
+<section>
+    <h1>Données</h1>
+    <mat-form-field>
+        <mat-label>Mission</mat-label>
+        <mat-select [(value)]="missionName" (selectionChange)="selectionChanged($event)">
+            <mat-option *ngFor="let mission of missions" [value]="mission">{{ mission }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <p *ngIf="missionName==''">Veuillez sélectionner une mission pour afficher les données.</p>
+    <table mat-table [dataSource]="tableData" class="mat-elevation-z8" *ngIf="missionName!=''">
+        <ng-container matColumnDef="Date">
+            <th mat-header-cell *matHeaderCellDef> Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.date | date: 'dd/MM/yy HH:mm:ss:SSS' }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Température">
+            <th mat-header-cell *matHeaderCellDef> Température </th>
+            <td mat-cell *matCellDef="let element"> {{element.temperature}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Pression">
+            <th mat-header-cell *matHeaderCellDef> Pression </th>
+            <td mat-cell *matCellDef="let element"> {{element.pression}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Altitude">
+            <th mat-header-cell *matHeaderCellDef> Altitude </th>
+            <td mat-cell *matCellDef="let element"> {{element.altitude}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="PM1.0(STD, ug/m3)">
+            <th mat-header-cell *matHeaderCellDef> PM1.0(STD, ug/m3) </th>
+            <td mat-cell *matCellDef="let element"> {{element.PM_STD_1}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="PM2.5(STD, ug/m3)">
+            <th mat-header-cell *matHeaderCellDef> PM2.5(STD, ug/m3) </th>
+            <td mat-cell *matCellDef="let element"> {{element.PM_STD_2_5}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="PM10(STD, ug/m3)">
+            <th mat-header-cell *matHeaderCellDef> PM10(STD, ug/m3) </th>
+            <td mat-cell *matCellDef="let element"> {{element.PM_STD_10}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="PM1.0(ATM, ug/m3)">
+            <th mat-header-cell *matHeaderCellDef> PM1.0(ATM, ug/m3) </th>
+            <td mat-cell *matCellDef="let element"> {{element.PM_ATM_1}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="PM2.5(ATM, ug/m3)">
+            <th mat-header-cell *matHeaderCellDef> PM2.5(ATM, ug/m3) </th>
+            <td mat-cell *matCellDef="let element"> {{element.PM_ATM_2_5}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="PM10(ATM, ug/m3)">
+            <th mat-header-cell *matHeaderCellDef> PM10(ATM, ug/m3) </th>
+            <td mat-cell *matCellDef="let element"> {{element.PM_ATM_10}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</section>

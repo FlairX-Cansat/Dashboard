@@ -1,0 +1,26 @@
+<section>
+    <h1>Graphiques</h1>
+    <mat-form-field>
+        <mat-label>Mission</mat-label>
+        <mat-select [(value)]="selectedMission" (selectionChange)="updateMission($event)">
+            <mat-option *ngFor="let mission of missions" [value]="mission">{{ mission }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <p *ngIf="selectedMission==''">Veuillez sélectionner une mission pour afficher les données.</p>
+    <p *ngIf="selectedMission!=''">Graphiques pour la mission {{ selectedMission }} du {{ missionData.at(0)?.date?.toLocaleString('fr-FR', { dateStyle: 'long' }) }}</p>
+    <div>
+        <canvas baseChart [type]="'line'" [data]="tempGraphData" *ngIf="selectedMission!=''" id="temp-chart" #tempChart></canvas>
+    </div>
+    <div>
+        <canvas baseChart [type]="'line'" [data]="pressureGraph" *ngIf="selectedMission!=''" #pressureChart></canvas>
+    </div>
+    <div>
+        <canvas baseChart [type]="'line'" [data]="altitudeGraph" *ngIf="selectedMission!=''" #altitudeChart></canvas>
+    </div>
+    <div>
+        <canvas baseChart [type]="'line'" [data]="stdParticuleData" *ngIf="selectedMission!=''" #stdParticuleChart></canvas>
+    </div>
+    <div>
+        <canvas baseChart [type]="'line'" [data]="atmParticuleData" *ngIf="selectedMission!=''" #atmParticuleChart></canvas>
+    </div>
+</section>
