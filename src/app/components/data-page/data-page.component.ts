@@ -5,6 +5,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { DataService } from '../../services/data.service';
 import { MatTableModule } from '@angular/material/table'
 import { MissionData } from '../../interfaces/mission-data';
+import { ProgressService } from '../../services/progress.service';
 
 @Component({
   selector: 'app-data-page',
@@ -25,7 +26,11 @@ export class DataPageComponent implements OnInit {
   tableData: MissionData[] = [];
 
   selectionChanged(event: any) {
+    this.progress.enableProgressBar();
     this.data.getData(this.missionName);
+    setTimeout(() => {
+      this.progress.disableProgressBar();
+    }, 1000);
   }
 
   ngOnInit() {
@@ -40,5 +45,5 @@ export class DataPageComponent implements OnInit {
     this.data.getMissions();
   }
 
-  constructor(private data: DataService) { }
+  constructor(private data: DataService, private progress: ProgressService) { }
 }

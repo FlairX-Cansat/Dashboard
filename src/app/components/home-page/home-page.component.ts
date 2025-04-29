@@ -3,6 +3,7 @@ import { MatCardModule } from "@angular/material/card";
 import { DataService } from '../../services/data.service';
 import { MissionData } from '../../interfaces/mission-data';
 import { CommonModule } from '@angular/common';
+import { ProgressService } from '../../services/progress.service';
 
 @Component({
   selector: 'app-home-page',
@@ -37,6 +38,7 @@ export class HomePageComponent implements OnInit {
   averagePm10Atm: number = 0;
 
   ngOnInit() {
+    this.progress.enableProgressBar();
     this.data.data$.subscribe(data => {
       this.lastMissionData = data;
       this.temperature = this.lastMissionData.map(data => Number(data.temperature));
@@ -99,6 +101,9 @@ export class HomePageComponent implements OnInit {
       this.averagePm1Atm = pm1AtmSum/this.pm1Atm.length;
       this.averagePm25Atm = pm25AtmSum/this.pm25Atm.length;
       this.averagePm10Atm = pm10AtmSum/this.pm10Atm.length;
+      setTimeout(() => {
+        this.progress.disableProgressBar();
+      }, 1000);
     });
 
     this.data.missions$.subscribe(missions => {
@@ -112,5 +117,5 @@ export class HomePageComponent implements OnInit {
     this.data.getMissions();
   }
 
-  constructor(private data: DataService) { }
+  constructor(private data: DataService, private progress: ProgressService) { }
 }

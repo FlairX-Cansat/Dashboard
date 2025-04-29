@@ -6,6 +6,7 @@ import { DataService } from '../../services/data.service';
 import Chart, { ChartData, ChartItem, ChartOptions } from 'chart.js/auto';
 import { MissionData } from '../../interfaces/mission-data';
 import { BaseChartDirective } from 'ng2-charts';
+import { ProgressService } from '../../services/progress.service';
 
 @Component({
   selector: 'app-graph-page',
@@ -399,7 +400,11 @@ export class GraphPageComponent implements OnInit {
   };
 
   updateMission(event: any) {
+    this.progress.enableProgressBar();
     this.data.getData(this.selectedMission);
+    setTimeout(() => {
+      this.progress.disableProgressBar();
+    }, 1000);
   }
 
   ngOnInit() {
@@ -478,5 +483,5 @@ export class GraphPageComponent implements OnInit {
     this.data.getMissions();
   }
 
-  constructor(private data: DataService, private cdr: ChangeDetectorRef) { }
+  constructor(private data: DataService, private cdr: ChangeDetectorRef, private progress: ProgressService) { }
 }

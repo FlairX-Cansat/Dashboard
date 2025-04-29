@@ -3,3 +3,4 @@
     <button mat-button routerLink="/charts">Graphiques</button>
     <button mat-button routerLink="/data">Données</button>
 </mat-toolbar>
+<mat-progress-bar mode="indeterminate" *ngIf="progress.showProgress()"></mat-progress-bar>
