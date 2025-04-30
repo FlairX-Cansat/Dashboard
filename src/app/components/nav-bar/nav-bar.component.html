@@ -2,5 +2,19 @@
     <button mat-button routerLink="/">FlairX</button>
     <button mat-button routerLink="/charts">Graphiques</button>
     <button mat-button routerLink="/data">Données</button>
+    <div class="spacer"></div>
+    <button mat-icon-button [matMenuTriggerFor]="themeMenu" aria-label="Sélectionnez le theme du site.">
+        <mat-icon fontSet="material-symbols-outlined" *ngIf="theme.selectedTheme() == 'system'">colors</mat-icon>
+        <mat-icon fontSet="material-symbols-outlined" *ngIf="theme.selectedTheme() == 'light'">light_mode</mat-icon>
+        <mat-icon fontSet="material-symbols-outlined" *ngIf="theme.selectedTheme() == 'dark'">dark_mode</mat-icon>
+      </button>
+      <mat-menu #themeMenu="matMenu">
+        @for (theme of theme.themes; track theme.name) {
+            <button mat-menu-item (click)="this.theme.setTheme(theme)">
+                <mat-icon fontSet="material-symbols-outlined">{{ theme.iconName }}</mat-icon>
+                <span>{{ theme.displayName }}</span>
+            </button>
+        }
+      </mat-menu>
 </mat-toolbar>
 <mat-progress-bar mode="indeterminate" *ngIf="progress.showProgress()"></mat-progress-bar>

@@ -6,3 +6,11 @@ mat-toolbar {
     container-text-color: var(--mat-sys-on-primary-container),
   ));
 }
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.theme-spacer {
+  width: 100%;
+}

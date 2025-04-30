@@ -5,6 +5,9 @@ import { RouterModule } from '@angular/router';
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { ProgressService } from '../../services/progress.service';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from "@angular/material/icon";
+import { MatMenuModule } from "@angular/material/menu";
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -13,6 +16,8 @@ import { CommonModule } from '@angular/common';
     MatButtonModule,
     RouterModule,
     MatProgressBarModule,
+    MatIconModule,
+    MatMenuModule,
     CommonModule
   ],
   templateUrl: './nav-bar.component.html',
@@ -20,5 +25,5 @@ import { CommonModule } from '@angular/common';
 })
 export class NavBarComponent {
 
-  constructor(public progress: ProgressService) { }
+  constructor(public progress: ProgressService, public theme: ThemeService) { }
 }
